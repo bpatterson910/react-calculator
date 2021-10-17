@@ -17,4 +17,4 @@ You will also see any lint errors in the console.
 ### `yarn deploy`
 
 Publish the app on live host.
-Open [http://pbrand910.github.io/react-calculator](http://pbrand910.github.io/react-calculator) to view it in the browser.
+Open [http://pbrand910.github.io/react-calculator](http://bpatterson910.github.io/react-calculator) to view it in the browser.
