@@ -22,7 +22,7 @@ const DisplayPanel = (props) => {
   const { total, next, modeSwitch } = props;
   let result = current(total, next);
   if (modeSwitch) {
-    result = result.substring(0, 12);
+    result = result.substring(0, 10);
   }
   else {
     if (result.length > 16) {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const limitDigits = (str, mode) => {
   let result = str;
   if (mode) {
-    result = str.substring(0, 15);
+    result = str.substring(0, 10);
   }
   else {
     if (str.length > 16) {
