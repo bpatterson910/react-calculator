@@ -11,7 +11,6 @@ import calculate from '../logic/calculate';
 const Calculator = () => {
   const [modeSwitch, setModeSwitch] = useState(false);
   const [isShowOperation, setShowOperation] = useState(false);
-  const [digitsLength, setDigitsLength] = useState(0);
   const initialObj = { total: null, next: null, operation: null };
   const [prevObj, setPrevObj] = useState(initialObj);
   const [state, setState] = useState(initialObj);
@@ -61,7 +60,6 @@ const Calculator = () => {
       const output = calculate(state, error.savedInput, modeSwitch);
       updateState(output);
     }
-    setDigitsLength(0);
   }, [error]);
 
   return (
