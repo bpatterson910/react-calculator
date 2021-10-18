@@ -27,10 +27,12 @@ const PreviewPanel = (props) => {
 
   return (
     <div>
-      <span
-        className="overflow-auto bg-gray-100 text-gray-400 text-xs w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-b-0 select-all">
-        {result}
-      </span>
+      <input
+        type="text"
+        className="bg-gray-100 text-gray-400 text-xs w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-b-0"
+        value={result}
+        disabled
+      />
     </div>
   )
 };

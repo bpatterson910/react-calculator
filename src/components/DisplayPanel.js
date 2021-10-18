@@ -32,9 +32,12 @@ const DisplayPanel = (props) => {
 
   return (
     <div>
-      <span type="text" className="overflow-auto text-right bg-gray-100 text-black text-2xl w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-t-0 select-all" >
-        {result}
-      </span>
+      <input 
+        type="text" 
+        className="text-right bg-gray-100 text-black text-2xl w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-t-0"
+        value= {result}
+        disabled
+      />
     </div>
   )
 };
