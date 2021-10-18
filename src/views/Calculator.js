@@ -9,9 +9,11 @@ import PreviewPanel from '../components/PreviewPanel';
 import calculate from '../logic/calculate';
 
 const Calculator = () => {
-  const [modeSwitch, setModeSwitch] = useState(0);
+  const [modeSwitch, setModeSwitch] = useState(false);
   const [isShowOperation, setShowOperation] = useState(false);
+  const [digitsLength, setDigitsLength] = useState(0);
   const initialObj = { total: null, next: null, operation: null };
+  const [prevObj, setPrevObj] = useState(initialObj);
   const [state, setState] = useState(initialObj);
   const [error, setError] = useState({ status: false });
 
@@ -28,11 +30,27 @@ const Calculator = () => {
       setState(initialObj);
       return;
     }
+
+    const RomaniaDigit = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
+    if (!!buttonName.match(/[0-9]+/) || RomaniaDigit.indexOf(buttonName) >= 0) {
+      if (digitsLength < 16)
+        setDigitsLength(digitsLength + 1);
+      else
+        return;
+    } else {
+      setDigitsLength(0);
+    }
+
     let operations = ['*', '/', '+', '-'];
-    operations.indexOf(buttonName) >=0 || ((state.next === null || state.next === '0') && buttonName === 'back' )? setShowOperation(true) : setShowOperation(false); //
+    operations.indexOf(buttonName) >= 0 || ((state.next === null || state.next === '0') && buttonName === 'back') ? setShowOperation(true) : setShowOperation(false);
+    if (buttonName === '=') {
+      setPrevObj(state);
+    }
+    else {
+      setPrevObj(initialObj);
+    }
     let output;
     try {
-      
       output = calculate(state, buttonName, modeSwitch);
     } catch (err) {
       errorHandler();
@@ -42,7 +60,8 @@ const Calculator = () => {
 
   const onSwitchMode = () => {
     setModeSwitch(!modeSwitch);
-    setState(initialObj)
+    setState(initialObj);
+    setPrevObj(initialObj);
   }
 
   useEffect(() => {
@@ -52,35 +71,37 @@ const Calculator = () => {
       const output = calculate(state, error.savedInput, modeSwitch);
       updateState(output);
     }
+    setDigitsLength(0);
   }, [error]);
 
   return (
     <div>
       <div className="text-center flex justify-center mt-20">
         <div className="w-4/5 sm:w-1/2 lg:w-1/4 flex flex-col">
-          <div className="flex flex-row py-3">            
+          <div className="flex flex-row py-3">
             <Toggle
-              checked = {modeSwitch}
-              onChange = {() => onSwitchMode() }
+              checked={modeSwitch}
+              onChange={() => onSwitchMode()}
             />
-            <span className="pl-6">{ modeSwitch ? "Romanian " : "Arabian " } Mode</span>
+            <span className="pl-6">{modeSwitch ? "Romanian " : "Arabian "} Mode</span>
           </div>
           <PreviewPanel
-            total = {state.total}
-            next ={state.next}
-            operation = {state.operation}
-            isShowOperation = {isShowOperation}
+            state={state}
+            isShowOperation={isShowOperation}
+            prevObj={prevObj}
+            modeSwitch={modeSwitch}
           />
-          <DisplayPanel 
+          <DisplayPanel
             total={state.total}
             next={state.next}
+            modeSwitch={modeSwitch}
           />
         </div>
       </div>
-      {modeSwitch ? 
-        <RomanianPanel handleClick={handleClick} /> 
-      : 
-      <ArabianPanel handleClick={handleClick}/>
+      {modeSwitch ?
+        <RomanianPanel handleClick={handleClick} />
+        :
+        <ArabianPanel handleClick={handleClick} />
       }
     </div>
   );

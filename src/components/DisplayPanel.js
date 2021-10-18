@@ -19,12 +19,23 @@ const current = (total, next) => {
 };
 
 const DisplayPanel = (props) => {
-  const { total, next } = props;
+  const { total, next, modeSwitch } = props;
+  let result = current(total, next);
+  if (modeSwitch) {
+    result = result.substring(0, 12);
+  }
+  else {
+    if (result.length > 16) {
+      let index = result.indexOf('e');
+      let expString = result.substring(index, result.length);
+      result = result.substring(0, 16 - expString.length) + expString;
+    }
+  }
 
   return (
     <div>
-      <span type="text" className="break-all text-right bg-gray-100 text-black text-5xl w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-t-0 select-all" >
-       { current(total, next) }
+      <span type="text" className="break-all text-right bg-gray-100 text-black text-3xl w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-t-0 select-all" >
+        {result}
       </span>
     </div>
   )
@@ -33,11 +44,13 @@ const DisplayPanel = (props) => {
 DisplayPanel.defaultProps = {
   total: null,
   next: null,
+  modeSwitch: false
 };
 
 DisplayPanel.propTypes = {
   total: PropTypes.string,
   next: PropTypes.string,
+  modeSwitch: PropTypes.bool
 };
 
 export default DisplayPanel;

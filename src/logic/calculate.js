@@ -1,26 +1,26 @@
 import operate from './operate';
 
 function isNumber(item, modeSwitch) {
-  const RomaniaDigit = ['I', 'V', 'X', 'L' ,'C', 'D', 'M'];
-  return modeSwitch ? RomaniaDigit.indexOf(item) >= 0 : !!item.match(/[0-9]+/) ;
+  const RomaniaDigit = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
+  return modeSwitch ? RomaniaDigit.indexOf(item) >= 0 : !!item.match(/[0-9]+/);
 }
 
-function deleteOneDigit(digit){
-  if(digit.length > 1){
+function deleteOneDigit(digit) {
+  if (digit.length > 1) {
     return digit.substring(0, digit.length - 1);
   }
-  else{
+  else {
     return '0';
   }
 }
 
 export default function calculate(obj, buttonName, modeSwitch) {
   if (buttonName === 'back') {
-    if(obj.next){
-      return {next: deleteOneDigit(obj.next)};
+    if (obj.next) {
+      return { next: deleteOneDigit(obj.next) };
     }
-    else{
-      return {next: null};
+    else {
+      return { next: null };
     }
   }
   if (buttonName === 'AC') {
@@ -35,7 +35,7 @@ export default function calculate(obj, buttonName, modeSwitch) {
     if (buttonName === '0' && obj.next === '0') {
       return {};
     }
-    if (obj.next === '0'){
+    if (obj.next === '0') {
       return { next: buttonName };
     }
     if (obj.operation) {

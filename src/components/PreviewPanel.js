@@ -1,14 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const limitDigits = (str, mode) => {
+  let result = str;
+  if (mode) {
+    result = str.substring(0, 15);
+  }
+  else {
+    if (str.length > 16) {
+      let index = str.indexOf('e');
+      let expString = str.substring(index, str.length);
+      result = str.substring(0, 15 - expString.length) + expString;
+    }
+
+  }
+  return result;
+}
+
 
 const PreviewPanel = (props) => {
-  const { total, next, operation, isShowOperation } = props;
+  const { state, isShowOperation, prevObj, modeSwitch } = props;
+  let result = state.total ? limitDigits(state.total, modeSwitch) : '0';
+  result += (state.next || isShowOperation) && state.operation !== null ? state.operation : "";
+  if (prevObj.total) {
+    result = limitDigits(prevObj.total, modeSwitch) + prevObj.operation;
+    result += prevObj.next ? limitDigits(prevObj.next, modeSwitch) + "=" : ""
+  }
+
   return (
     <div>
-      <span 
-        className="break-all bg-gray-100 text-gray-400 text-base w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-b-0 select-all">
-       { total ? total : '0' } {next || isShowOperation ? operation : ""}
+      <span
+        className="break-all bg-gray-100 text-gray-400 text-sm w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-b-0 select-all">
+        {result}
       </span>
     </div>
   )
@@ -16,16 +39,16 @@ const PreviewPanel = (props) => {
 
 PreviewPanel.defaultProps = {
   state: null,
-  next: null,
-  operation: null,
-  isShowOperation: false
+  isShowOperation: false,
+  prevObj: null,
+  modeSwitch: false
 };
 
 PreviewPanel.propTypes = {
-  total: PropTypes.string,
-  next: PropTypes.string,
-  operation: PropTypes.string,
-  isShowOperation: PropTypes.bool
+  state: PropTypes.object,
+  isShowOperation: PropTypes.bool,
+  prevObj: PropTypes.object,
+  modeSwitch: PropTypes.bool
 };
 
 export default PreviewPanel;

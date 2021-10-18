@@ -42,7 +42,7 @@ function Arab2Roman(inputNum) {
     roman = (keylst[+digits.pop() + (i * 10)] || "") + roman;
 
   let val = Array(+digits.join("") + 1).join("M") + roman;
-  
+
   return val
 }
 
