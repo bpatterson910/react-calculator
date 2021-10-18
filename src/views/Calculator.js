@@ -73,7 +73,7 @@ const Calculator = () => {
               checked={modeSwitch}
               onChange={() => onSwitchMode()}
             />
-            <span className="pl-6">{modeSwitch ? "Romanian " : "Arabian "} Mode</span>
+            <span className="pl-6">{modeSwitch ? "Roman Numeral " : "Standard "} Mode</span>
           </div>
           <PreviewPanel
             state={state}
