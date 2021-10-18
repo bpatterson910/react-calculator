@@ -30,7 +30,7 @@ const PreviewPanel = (props) => {
   return (
     <div>
       <span
-        className="break-all bg-gray-100 text-gray-400 text-sm w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-b-0 select-all">
+        className="break-all bg-gray-100 text-gray-400 text-xs w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-b-0 select-all">
         {result}
       </span>
     </div>
