@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 
 const limitDigits = (str, mode) => {
   let result = str;
-  if (mode) {
-    result = str.substring(0, 10);
-  }
-  else {
+
+  if (!mode) {
     if (str.length > 16) {
       let index = str.indexOf('e');
       let expString = str.substring(index, str.length);
@@ -30,7 +28,7 @@ const PreviewPanel = (props) => {
   return (
     <div>
       <span
-        className="break-all bg-gray-100 text-gray-400 text-xs w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-b-0 select-all">
+        className="overflow-auto bg-gray-100 text-gray-400 text-xs w-full h-18 px-2 flex justify-end items-end border-white border-2 border-gray-200 border-b-0 select-all">
         {result}
       </span>
     </div>

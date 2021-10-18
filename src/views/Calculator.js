@@ -31,16 +31,6 @@ const Calculator = () => {
       return;
     }
 
-    const RomaniaDigit = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
-    if (!!buttonName.match(/[0-9]+/) || RomaniaDigit.indexOf(buttonName) >= 0) {
-      if (digitsLength < 16)
-        setDigitsLength(digitsLength + 1);
-      else
-        return;
-    } else {
-      setDigitsLength(0);
-    }
-
     let operations = ['*', '/', '+', '-'];
     operations.indexOf(buttonName) >= 0 || ((state.next === null || state.next === '0') && buttonName === 'back') ? setShowOperation(true) : setShowOperation(false);
     if (buttonName === '=') {
