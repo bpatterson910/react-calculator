@@ -23,10 +23,15 @@ const DisplayPanel = (props) => {
   let result = current(total, next);
 
   if (!modeSwitch) {
-    if (result.length > 16) {
-      let index = result.indexOf('e');
-      let expString = result.substring(index, result.length);
-      result = result.substring(0, 16 - expString.length) + expString;
+    if (total === 'error'){
+      result = "Cannot divide by ZERO";
+    } 
+    else {
+      if (result.length > 16) {
+        let index = result.indexOf('e');
+        let expString = result.substring(index, result.length);
+        result = result.substring(0, 16 - expString.length) + expString;
+      }
     }
   }
 

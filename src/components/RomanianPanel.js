@@ -6,7 +6,7 @@ const RomanianPanel = ({ handleClick }) => {
       <div className="w-4/5 sm:w-1/2 lg:w-1/4 text-2xl">
         <div className="flex">
           <button
-            className="w-2/4 bg-gray-100 hover:bg-gray-400 py-3 border-2 border-gray-200"
+            className="w-2/4 bg-red-400 hover:bg-red-200 py-3 border-2 border-red-200"
             onClick={() => handleClick("AC")}
           >
             AC

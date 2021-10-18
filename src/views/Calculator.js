@@ -21,7 +21,7 @@ const Calculator = () => {
 
   const errorHandler = () => {
     setError({ status: true });
-    setState({ total: 'Invalid operation: Can\'t Divide by Zero', next: null, operation: null });
+    setState({ total: 'error', next: null, operation: null });
   };
 
   const handleClick = (buttonName) => {
